@@ -1,22 +1,26 @@
 # SpringCloud 项目-尚品甄选
 
-# 必看
+# 必看❗️❗️
 
 🔥如果需要快速运行项目，请直接到最下面有快速上手篇，根据快速上手指南，可以让你轻松运行项目🔥。
 
 如需项目运行搭建指导，可以添加微信远程协助
 
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/8.png)
 
+如果觉得项目完善的还不错的话，请作者喝杯奶茶吧😚
+
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/9.png)
 
 ## 一、项目功能
 
 ### 1、后台管理系统功能
 
-![](https://gitee.com/galie/SPZX-Backend/blob/master/IMG/1.png)
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/1.png)
 
 ### 2、前台用户系统功能
 
-![](img/2.png)
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/2.png)
 
 
 
@@ -26,7 +30,7 @@
 
 #### （1）权限相关的表关系
 
-![](img/3.png)
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/3.png)
 
 #### （2）商品相关的表关系
 
@@ -54,9 +58,9 @@
 
 ### 3、后端技术
 
-![](img/4.png)
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/4.png)
 
-![](img/5.png)
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/5.png)
 
 
 ## 三、快速上手
@@ -77,7 +81,7 @@ minio:
 
 3）启动Minio，输入minio.exe server D:\minio\data，账号密码都是minioadmin
 
-![](http://s5316urxq.bkt.clouddn.com/SPZX/6.png)
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/6.png)
 
 ### MySQL 数据库
 
@@ -157,6 +161,7 @@ cloud:
 
 如上配置修改完成之后，分别启动如下模块，后端即可正确运行，如果有报错的话，需要针对报错检查排查原因
 
-![](http://s5316urxq.bkt.clouddn.com/SPZX/7.png)
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/7.png)
 
-![](https://gitee.com/galie/SPZX-Backend/blob/master/IMG/1.png)
+
+
