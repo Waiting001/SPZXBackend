@@ -12,7 +12,7 @@
 
 ### 1、后台管理系统功能
 
-![](img/1.png)
+![](https://gitee.com/galie/SPZX-Backend/blob/master/IMG/1.png)
 
 ### 2、前台用户系统功能
 
@@ -158,3 +158,5 @@ cloud:
 如上配置修改完成之后，分别启动如下模块，后端即可正确运行，如果有报错的话，需要针对报错检查排查原因
 
 ![](http://s5316urxq.bkt.clouddn.com/SPZX/7.png)
+
+![](https://gitee.com/galie/SPZX-Backend/blob/master/IMG/1.png)
