@@ -7,12 +7,14 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
+    #TODO 将192.168.10.100修改成自己的ip
     url: jdbc:mysql://192.168.10.100:3306/db_spzx?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
-    password: root
+    password: 123456
   # Redis的相关配置
   data:
     redis:
+      #TODO 将192.168.10.100修改成自己的ip
       host: 192.168.10.100
       port: 6379
       #password: root
@@ -34,6 +36,7 @@ spzx:
       - /swagger-ui/**
       - /*/api-docs/**
   minio:
+    #TODO 将127.0.0.1修改成自己的ip
     endpointUrl: http://127.0.0.1:9000
     accessKey: minioadmin
     secreKey: minioadmin

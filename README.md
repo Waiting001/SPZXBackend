@@ -1,14 +1,22 @@
-# SpringCloud 项目
+# SpringCloud 项目-尚品甄选
+
+# 必看
+
+🔥如果需要快速运行项目，请直接到最下面有快速上手篇，根据快速上手指南，可以让你轻松运行项目🔥。
+
+如需项目运行搭建指导，可以添加微信远程协助
+
+
 
 ## 一、项目功能
 
 ### 1、后台管理系统功能
 
-![](http://s5316urxq.bkt.clouddn.com/SPZX/1.png)
+![](img/1.png)
 
 ### 2、前台用户系统功能
 
-![](http://s5316urxq.bkt.clouddn.com/SPZX/2.png)
+![](img/2.png)
 
 
 
@@ -18,7 +26,7 @@
 
 #### （1）权限相关的表关系
 
-![](http://s5316urxq.bkt.clouddn.com/SPZX/3.png)
+![](img/3.png)
 
 #### （2）商品相关的表关系
 
@@ -46,9 +54,9 @@
 
 ### 3、后端技术
 
-![](http://s5316urxq.bkt.clouddn.com/SPZX/4.png)
+![](img/4.png)
 
-![](http://s5316urxq.bkt.clouddn.com/SPZX/5.png)
+![](img/5.png)
 
 
 ## 三、快速上手

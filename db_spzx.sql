@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 192.168.10.100
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80020 (8.0.20)
- Source Host           : 192.168.10.100:3306
+ Source Server Version : 80012 (8.0.12)
+ Source Host           : localhost:3306
  Source Schema         : db_spzx
 
  Target Server Type    : MySQL
- Target Server Version : 80020 (8.0.20)
+ Target Server Version : 80012 (8.0.12)
  File Encoding         : 65001
 
- Date: 24/11/2023 23:04:13
+ Date: 09/04/2024 01:49:26
 */
 
 SET NAMES utf8mb4;
@@ -22,14 +22,14 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `brand`;
 CREATE TABLE `brand`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '品牌名称',
   `logo` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '品牌图标',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '分类品牌' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '分类品牌' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of brand
@@ -44,17 +44,17 @@ INSERT INTO `brand` VALUES (4, 'opop4', 'http://127.0.0.1:9000/spzx-bucket/20230
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '分类id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '分类id',
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分类名称',
   `image_url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `parent_id` bigint NULL DEFAULT NULL COMMENT '父分类id',
-  `status` tinyint NULL DEFAULT NULL COMMENT '是否显示[0-不显示，1显示]',
-  `order_num` int NULL DEFAULT NULL COMMENT '排序',
+  `parent_id` bigint(20) NULL DEFAULT NULL COMMENT '父分类id',
+  `status` tinyint(4) NULL DEFAULT NULL COMMENT '是否显示[0-不显示，1显示]',
+  `order_num` int(11) NULL DEFAULT NULL COMMENT '排序',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9992 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品分类' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9992 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品分类' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of category
@@ -768,14 +768,14 @@ INSERT INTO `category` VALUES (703, '工艺礼品乐器', 'https://lilishop-oss.
 -- ----------------------------
 DROP TABLE IF EXISTS `category_brand`;
 CREATE TABLE `category_brand`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `brand_id` bigint NULL DEFAULT NULL COMMENT '品牌ID',
-  `category_id` bigint NULL DEFAULT NULL COMMENT '分类ID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `brand_id` bigint(20) NULL DEFAULT NULL COMMENT '品牌ID',
+  `category_id` bigint(20) NULL DEFAULT NULL COMMENT '分类ID',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '分类品牌' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '分类品牌' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of category_brand
@@ -792,26 +792,26 @@ INSERT INTO `category_brand` VALUES (6, 2, 702, '2023-07-19 08:41:40', '2023-07-
 -- ----------------------------
 DROP TABLE IF EXISTS `coupon_info`;
 CREATE TABLE `coupon_info`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `coupon_type` tinyint NOT NULL DEFAULT 1 COMMENT '购物券类型 1 现金券 2 满减券',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `coupon_type` tinyint(4) NOT NULL DEFAULT 1 COMMENT '购物券类型 1 现金券 2 满减券',
   `coupon_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '优惠卷名字',
   `amount` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '金额',
   `condition_amount` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '使用门槛 0->没门槛',
   `start_time` date NULL DEFAULT NULL COMMENT '可以领取的开始日期',
   `end_time` date NULL DEFAULT NULL COMMENT '可以领取的结束日期',
-  `range_type` tinyint NOT NULL DEFAULT 1 COMMENT '使用范围[1->全场通用；2->指定分类；3->指定商品]',
+  `range_type` tinyint(4) NOT NULL DEFAULT 1 COMMENT '使用范围[1->全场通用；2->指定分类；3->指定商品]',
   `range_desc` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '使用范围描述',
-  `publish_count` int NOT NULL DEFAULT 1 COMMENT '发行数量',
-  `per_limit` int NOT NULL DEFAULT 1 COMMENT '每人限领张数',
-  `use_count` int NOT NULL DEFAULT 0 COMMENT '已使用数量',
-  `receive_count` int NOT NULL DEFAULT 0 COMMENT '领取数量',
+  `publish_count` int(11) NOT NULL DEFAULT 1 COMMENT '发行数量',
+  `per_limit` int(11) NOT NULL DEFAULT 1 COMMENT '每人限领张数',
+  `use_count` int(11) NOT NULL DEFAULT 0 COMMENT '已使用数量',
+  `receive_count` int(11) NOT NULL DEFAULT 0 COMMENT '领取数量',
   `expire_time` datetime NULL DEFAULT NULL COMMENT '过期时间',
   `publish_status` tinyint(1) NULL DEFAULT NULL COMMENT '发布状态[0-未发布，1-已发布]',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of coupon_info
@@ -822,15 +822,15 @@ CREATE TABLE `coupon_info`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `coupon_range`;
 CREATE TABLE `coupon_range`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '购物券编号',
-  `coupon_id` bigint NOT NULL DEFAULT 0 COMMENT '优惠券id',
-  `range_type` tinyint NOT NULL DEFAULT 1 COMMENT '范围类型； 1->商品(sku) ；2->分类',
-  `range_id` bigint NOT NULL DEFAULT 0,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '购物券编号',
+  `coupon_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '优惠券id',
+  `range_type` tinyint(4) NOT NULL DEFAULT 1 COMMENT '范围类型； 1->商品(sku) ；2->分类',
+  `range_id` bigint(20) NOT NULL DEFAULT 0,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券范围表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券范围表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of coupon_range
@@ -841,21 +841,21 @@ CREATE TABLE `coupon_range`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `coupon_user`;
 CREATE TABLE `coupon_user`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `coupon_id` bigint NULL DEFAULT NULL COMMENT '购物券ID',
-  `user_id` bigint NULL DEFAULT NULL COMMENT '用户ID',
-  `order_id` bigint NULL DEFAULT NULL COMMENT '订单ID',
-  `coupon_status` tinyint NULL DEFAULT NULL COMMENT '购物券状态（1：未使用 2：已使用）',
-  `get_type` tinyint NOT NULL DEFAULT 2 COMMENT '获取类型（1：后台赠送；2：主动获取）',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `coupon_id` bigint(20) NULL DEFAULT NULL COMMENT '购物券ID',
+  `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',
+  `order_id` bigint(20) NULL DEFAULT NULL COMMENT '订单ID',
+  `coupon_status` tinyint(4) NULL DEFAULT NULL COMMENT '购物券状态（1：未使用 2：已使用）',
+  `get_type` tinyint(4) NOT NULL DEFAULT 2 COMMENT '获取类型（1：后台赠送；2：主动获取）',
   `get_time` datetime NULL DEFAULT NULL COMMENT '获取时间',
   `using_time` datetime NULL DEFAULT NULL COMMENT '使用时间',
   `used_time` datetime NULL DEFAULT NULL COMMENT '支付时间',
   `expire_time` datetime NULL DEFAULT NULL COMMENT '过期时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券领用表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券领用表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of coupon_user
@@ -866,23 +866,23 @@ CREATE TABLE `coupon_user`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `order_info`;
 CREATE TABLE `order_info`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `user_id` bigint NOT NULL DEFAULT 0 COMMENT '会员_id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `user_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '会员_id',
   `nick_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
   `order_no` char(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '订单号',
-  `coupon_id` bigint NULL DEFAULT NULL COMMENT '使用的优惠券',
+  `coupon_id` bigint(20) NULL DEFAULT NULL COMMENT '使用的优惠券',
   `total_amount` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '订单总额',
   `coupon_amount` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '优惠券',
   `original_total_amount` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '原价金额',
   `feight_fee` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '运费',
-  `pay_type` tinyint NULL DEFAULT NULL COMMENT '支付方式【1->微信 2->支付宝】',
-  `order_status` tinyint NOT NULL DEFAULT 0 COMMENT '订单状态【0->待付款；1->待发货；2->已发货；3->待用户收货，已完成；-1->已取消】',
+  `pay_type` tinyint(4) NULL DEFAULT NULL COMMENT '支付方式【1->微信 2->支付宝】',
+  `order_status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '订单状态【0->待付款；1->待发货；2->已发货；3->待用户收货，已完成；-1->已取消】',
   `receiver_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收货人姓名',
   `receiver_phone` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收货人电话',
   `receiver_tag_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收货人地址标签',
-  `receiver_province` bigint NULL DEFAULT NULL COMMENT '省份/直辖市',
-  `receiver_city` bigint NULL DEFAULT NULL COMMENT '城市',
-  `receiver_district` bigint NULL DEFAULT NULL COMMENT '区',
+  `receiver_province` bigint(20) NULL DEFAULT NULL COMMENT '省份/直辖市',
+  `receiver_city` bigint(20) NULL DEFAULT NULL COMMENT '城市',
+  `receiver_district` bigint(20) NULL DEFAULT NULL COMMENT '区',
   `receiver_address` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详细地址',
   `payment_time` datetime NULL DEFAULT NULL COMMENT '支付时间',
   `delivery_time` datetime NULL DEFAULT NULL COMMENT '发货时间',
@@ -892,9 +892,9 @@ CREATE TABLE `order_info`  (
   `cancel_reason` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '取消订单原因',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of order_info
@@ -908,24 +908,25 @@ INSERT INTO `order_info` VALUES (6, 33, '李佳乐', '1699707492986', NULL, 2999
 INSERT INTO `order_info` VALUES (7, 33, '李佳乐', '1699790958129', NULL, 2999.00, 0.00, 2999.00, 0.00, 2, 0, '李佳乐', '17346929695', '家', 430000, 430400, 430408, '湖南省衡阳市蒸湘区', NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-12 12:09:18', '2023-11-12 12:09:18', 0);
 INSERT INTO `order_info` VALUES (8, 33, '李佳乐', '1699790985669', NULL, 2999.00, 0.00, 2999.00, 0.00, 2, 0, '李佳乐', '17346929695', '家', 430000, 430400, 430408, '湖南省衡阳市蒸湘区', NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-12 12:09:45', '2023-11-12 12:09:45', 0);
 INSERT INTO `order_info` VALUES (9, 33, '李佳乐', '1699791034354', NULL, 2999.00, 0.00, 2999.00, 0.00, 2, 0, '李佳乐', '17346929695', '家', 430000, 430400, 430408, '湖南省衡阳市蒸湘区', NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-12 12:10:34', '2023-11-12 12:10:34', 0);
+INSERT INTO `order_info` VALUES (10, 33, '李佳乐', '1712590936346', NULL, 2999.00, 0.00, 2999.00, 0.00, 2, 0, '李佳乐', '17346929695', '家', 430000, 430400, 430408, '湖南省衡阳市蒸湘区', NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-08 23:42:16', '2024-04-08 23:42:16', 0);
 
 -- ----------------------------
 -- Table structure for order_item
 -- ----------------------------
 DROP TABLE IF EXISTS `order_item`;
 CREATE TABLE `order_item`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `order_id` bigint NULL DEFAULT NULL COMMENT 'order_id',
-  `sku_id` bigint NULL DEFAULT NULL COMMENT '商品sku编号',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `order_id` bigint(20) NULL DEFAULT NULL COMMENT 'order_id',
+  `sku_id` bigint(20) NULL DEFAULT NULL COMMENT '商品sku编号',
   `sku_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品sku名字',
   `thumb_img` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品sku图片',
   `sku_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '商品sku价格',
-  `sku_num` int NULL DEFAULT NULL COMMENT '商品购买的数量',
+  `sku_num` int(11) NULL DEFAULT NULL COMMENT '商品购买的数量',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单项信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单项信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of order_item
@@ -940,22 +941,23 @@ INSERT INTO `order_item` VALUES (7, 6, 2, '小米 红米Note10 5G手机 颜色:�
 INSERT INTO `order_item` VALUES (8, 7, 2, '小米 红米Note10 5G手机 颜色:白色 内存:18G', 'http://139.198.127.41:9000/spzx/20230525/665832167-5_u_1 (1).jpg', 2999.00, 1, '2023-11-12 12:09:18', '2023-11-12 12:09:18', 0);
 INSERT INTO `order_item` VALUES (9, 8, 2, '小米 红米Note10 5G手机 颜色:白色 内存:18G', 'http://139.198.127.41:9000/spzx/20230525/665832167-5_u_1 (1).jpg', 2999.00, 1, '2023-11-12 12:09:45', '2023-11-12 12:09:45', 0);
 INSERT INTO `order_item` VALUES (10, 9, 2, '小米 红米Note10 5G手机 颜色:白色 内存:18G', 'http://139.198.127.41:9000/spzx/20230525/665832167-5_u_1 (1).jpg', 2999.00, 1, '2023-11-12 12:10:34', '2023-11-12 12:10:34', 0);
+INSERT INTO `order_item` VALUES (11, 10, 2, '小米 红米Note10 5G手机 颜色:白色 内存:18G', 'http://139.198.127.41:9000/spzx/20230525/665832167-5_u_1 (1).jpg', 2999.00, 1, '2024-04-08 23:42:16', '2024-04-08 23:42:16', 0);
 
 -- ----------------------------
 -- Table structure for order_log
 -- ----------------------------
 DROP TABLE IF EXISTS `order_log`;
 CREATE TABLE `order_log`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `order_id` bigint NULL DEFAULT NULL COMMENT '订单id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) NULL DEFAULT NULL COMMENT '订单id',
   `operate_user` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作人：用户；系统；后台管理员',
-  `process_status` int NULL DEFAULT NULL COMMENT '订单状态',
+  `process_status` int(11) NULL DEFAULT NULL COMMENT '订单状态',
   `note` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 234 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 235 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of order_log
@@ -1019,22 +1021,23 @@ INSERT INTO `order_log` VALUES (230, 6, NULL, 1, '支付宝支付成功', '2023-
 INSERT INTO `order_log` VALUES (231, 7, NULL, 0, '提交订单', '2023-11-12 12:09:18', '2023-11-12 12:09:18', 0);
 INSERT INTO `order_log` VALUES (232, 8, NULL, 0, '提交订单', '2023-11-12 12:09:45', '2023-11-12 12:09:45', 0);
 INSERT INTO `order_log` VALUES (233, 9, NULL, 0, '提交订单', '2023-11-12 12:10:34', '2023-11-12 12:10:34', 0);
+INSERT INTO `order_log` VALUES (234, 10, NULL, 0, '提交订单', '2024-04-08 23:42:16', '2024-04-08 23:42:16', 0);
 
 -- ----------------------------
 -- Table structure for order_statistics
 -- ----------------------------
 DROP TABLE IF EXISTS `order_statistics`;
 CREATE TABLE `order_statistics`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `province_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '省份',
   `order_date` date NULL DEFAULT NULL COMMENT '订单统计日期',
   `total_amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '总金额',
-  `total_num` int NULL DEFAULT NULL COMMENT '订单总数',
+  `total_num` int(11) NULL DEFAULT NULL COMMENT '订单总数',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 289 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单统计' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 289 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单统计' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of order_statistics
@@ -1049,10 +1052,10 @@ INSERT INTO `order_statistics` VALUES (264, NULL, '2023-07-26', 50.00, 8, '2023-
 -- ----------------------------
 DROP TABLE IF EXISTS `payment_info`;
 CREATE TABLE `payment_info`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `user_id` bigint NULL DEFAULT NULL COMMENT '用户id',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户id',
   `order_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '订单号',
-  `pay_type` tinyint NOT NULL DEFAULT 0 COMMENT '付款方式：1-微信 2-支付宝',
+  `pay_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '付款方式：1-微信 2-支付宝',
   `out_trade_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易编号（微信或支付）',
   `amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '支付金额',
   `content` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易内容',
@@ -1061,10 +1064,10 @@ CREATE TABLE `payment_info`  (
   `callback_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '回调信息',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `is_deleted` tinyint NOT NULL DEFAULT 0,
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `uniq_order_no`(`order_no` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '付款信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '付款信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment_info
@@ -1075,29 +1078,30 @@ INSERT INTO `payment_info` VALUES (3, 33, '1699705054872', 2, '20231111220014747
 INSERT INTO `payment_info` VALUES (4, 33, '1699707266876', 2, '2023111122001474741427166369', 2999.00, '小米 红米Note10 5G手机 颜色:白色 内存:18G ', '1', '2023-11-11 20:54:46', '{\"gmt_create\":\"2023-11-11 20:54:42\",\"charset\":\"utf-8\",\"seller_email\":\"zhuchangqing@atguigu.com\",\"subject\":\"小米 红米Note10 5G手机 颜色:白色 内存:18G \",\"buyer_id\":\"2088932511374742\",\"invoice_amount\":\"0.01\",\"notify_id\":\"2023111101222205443074741451024261\",\"fund_bill_list\":\"[{\\\"amount\\\":\\\"0.01\\\",\\\"fundChannel\\\":\\\"ALIPAYACCOUNT\\\"}]\",\"notify_type\":\"trade_status_sync\",\"trade_status\":\"TRADE_SUCCESS\",\"receipt_amount\":\"0.01\",\"buyer_pay_amount\":\"0.01\",\"app_id\":\"2021001163617452\",\"seller_id\":\"2088831489324244\",\"gmt_payment\":\"2023-11-11 20:54:43\",\"notify_time\":\"2023-11-11 20:54:43\",\"version\":\"1.0\",\"out_trade_no\":\"1699707266876\",\"total_amount\":\"0.01\",\"trade_no\":\"2023111122001474741427166369\",\"auth_app_id\":\"2021001163617452\",\"buyer_logon_id\":\"173****9695\",\"point_amount\":\"0.00\"}', '2023-11-11 12:54:31', '2023-11-11 12:54:45', 0);
 INSERT INTO `payment_info` VALUES (5, 33, '1699707492986', 2, '2023111122001474741423089855', 2999.00, '小米 红米Note10 5G手机 颜色:白色 内存:18G ', '1', '2023-11-11 20:58:33', '{\"gmt_create\":\"2023-11-11 20:58:30\",\"charset\":\"utf-8\",\"seller_email\":\"zhuchangqing@atguigu.com\",\"subject\":\"小米 红米Note10 5G手机 颜色:白色 内存:18G \",\"buyer_id\":\"2088932511374742\",\"invoice_amount\":\"0.01\",\"notify_id\":\"2023111101222205831074741456288434\",\"fund_bill_list\":\"[{\\\"amount\\\":\\\"0.01\\\",\\\"fundChannel\\\":\\\"ALIPAYACCOUNT\\\"}]\",\"notify_type\":\"trade_status_sync\",\"trade_status\":\"TRADE_SUCCESS\",\"receipt_amount\":\"0.01\",\"buyer_pay_amount\":\"0.01\",\"app_id\":\"2021001163617452\",\"seller_id\":\"2088831489324244\",\"gmt_payment\":\"2023-11-11 20:58:31\",\"notify_time\":\"2023-11-11 20:58:31\",\"version\":\"1.0\",\"out_trade_no\":\"1699707492986\",\"total_amount\":\"0.01\",\"trade_no\":\"2023111122001474741423089855\",\"auth_app_id\":\"2021001163617452\",\"buyer_logon_id\":\"173****9695\",\"point_amount\":\"0.00\"}', '2023-11-11 12:58:19', '2023-11-11 12:58:32', 0);
 INSERT INTO `payment_info` VALUES (6, 33, '1699791034354', 2, NULL, 2999.00, '小米 红米Note10 5G手机 颜色:白色 内存:18G ', '0', NULL, NULL, '2023-11-12 12:10:40', '2023-11-12 12:10:40', 0);
+INSERT INTO `payment_info` VALUES (7, 33, '1712590936346', 2, NULL, 2999.00, '小米 红米Note10 5G手机 颜色:白色 内存:18G ', '0', NULL, NULL, '2024-04-08 23:42:20', '2024-04-08 23:42:20', 0);
 
 -- ----------------------------
 -- Table structure for product
 -- ----------------------------
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品名称',
-  `brand_id` bigint NULL DEFAULT NULL COMMENT '品牌ID',
-  `category1_id` bigint NULL DEFAULT NULL COMMENT '一级分类id',
-  `category2_id` bigint NULL DEFAULT NULL COMMENT '二级分类id',
-  `category3_id` bigint NULL DEFAULT NULL COMMENT '三级分类id',
+  `brand_id` bigint(20) NULL DEFAULT NULL COMMENT '品牌ID',
+  `category1_id` bigint(20) NULL DEFAULT NULL COMMENT '一级分类id',
+  `category2_id` bigint(20) NULL DEFAULT NULL COMMENT '二级分类id',
+  `category3_id` bigint(20) NULL DEFAULT NULL COMMENT '三级分类id',
   `unit_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '计量单位',
   `slider_urls` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '轮播图',
   `spec_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商品规格json',
-  `status` tinyint NOT NULL DEFAULT 0 COMMENT '线上状态：0-初始值，1-上架，-1-自主下架',
-  `audit_status` tinyint NOT NULL DEFAULT 0 COMMENT '审核状态：0-初始值，1-通过，-1-未通过',
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '线上状态：0-初始值，1-上架，-1-自主下架',
+  `audit_status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '审核状态：0-初始值，1-通过，-1-未通过',
   `audit_message` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '审核信息',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product
@@ -1111,15 +1115,15 @@ INSERT INTO `product` VALUES (3, '华为手机最新款1', 2, 1, 2, 3, '台', 'h
 -- ----------------------------
 DROP TABLE IF EXISTS `product_attr`;
 CREATE TABLE `product_attr`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `product_id` bigint NULL DEFAULT NULL COMMENT '商品id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `product_id` bigint(20) NULL DEFAULT NULL COMMENT '商品id',
   `attr_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '属性key',
   `attr_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '属性value',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品属性表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品属性表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_attr
@@ -1130,14 +1134,14 @@ CREATE TABLE `product_attr`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `product_details`;
 CREATE TABLE `product_details`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `product_id` bigint NULL DEFAULT NULL COMMENT '商品id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `product_id` bigint(20) NULL DEFAULT NULL COMMENT '商品id',
   `image_urls` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '详情图片地址',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品sku属性表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品sku属性表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_details
@@ -1151,25 +1155,25 @@ INSERT INTO `product_details` VALUES (3, 3, 'http://127.0.0.1:9000/spzx-bucket/2
 -- ----------------------------
 DROP TABLE IF EXISTS `product_sku`;
 CREATE TABLE `product_sku`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `sku_code` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品编号',
   `sku_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `product_id` bigint NULL DEFAULT NULL COMMENT '商品ID',
+  `product_id` bigint(20) NULL DEFAULT NULL COMMENT '商品ID',
   `thumb_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '缩略图路径',
   `sale_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '售价',
   `market_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '市场价',
   `cost_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '成本价',
-  `stock_num` int NULL DEFAULT NULL COMMENT '库存数',
-  `sale_num` int NOT NULL DEFAULT 0 COMMENT '销量',
+  `stock_num` int(11) NULL DEFAULT NULL COMMENT '库存数',
+  `sale_num` int(11) NOT NULL DEFAULT 0 COMMENT '销量',
   `sku_spec` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'sku规格信息json',
   `weight` decimal(10, 2) NULL DEFAULT NULL COMMENT '重量',
   `volume` decimal(10, 2) NULL DEFAULT NULL COMMENT '体积',
-  `status` tinyint NULL DEFAULT NULL COMMENT '线上状态：0-初始值，1-上架，-1-自主下架',
+  `status` tinyint(4) NULL DEFAULT NULL COMMENT '线上状态：0-初始值，1-上架，-1-自主下架',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品sku' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品sku' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_sku
@@ -1190,14 +1194,14 @@ INSERT INTO `product_sku` VALUES (10, '3_0', '华为手机最新款200 + 60L', 3
 -- ----------------------------
 DROP TABLE IF EXISTS `product_spec`;
 CREATE TABLE `product_spec`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `spec_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '规格名称',
   `spec_value` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '规格值：\"[{\"key\":\"颜色\",\"valueList\":[\"蓝\",\"白\",\"红\"]]\"',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品规格' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品规格' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_spec
@@ -1212,13 +1216,13 @@ INSERT INTO `product_spec` VALUES (9, '1111', '[]', '2023-11-11 08:07:23', '2023
 -- ----------------------------
 DROP TABLE IF EXISTS `product_unit`;
 CREATE TABLE `product_unit`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品单位' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品单位' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_unit
@@ -1234,17 +1238,17 @@ INSERT INTO `product_unit` VALUES (5, '带', '2023-06-06 09:47:43', '2023-06-06 
 -- ----------------------------
 DROP TABLE IF EXISTS `region`;
 CREATE TABLE `region`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '地区id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '地区id',
   `code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '地区编码',
-  `parent_code` bigint NULL DEFAULT NULL COMMENT '上级地区code',
+  `parent_code` bigint(20) NULL DEFAULT NULL COMMENT '上级地区code',
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '地区名称',
-  `level` int NULL DEFAULT NULL COMMENT '地区级别：1-省、自治区、直辖市 2-地级市、地区、自治州、盟 3-市辖区、县级市、县',
+  `level` int(11) NULL DEFAULT NULL COMMENT '地区级别：1-省、自治区、直辖市 2-地级市、地区、自治州、盟 3-市辖区、县级市、县',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '逻辑删除(1:已删除，0:未删除)',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '逻辑删除(1:已删除，0:未删除)',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_code`(`code` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3712 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '地区信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3712 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '地区信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of region
@@ -4966,7 +4970,7 @@ INSERT INTO `region` VALUES (3711, '820104', 820100, '路环', 3, '2023-02-01 09
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_login_log`;
 CREATE TABLE `sys_login_log`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '访问ID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '访问ID',
   `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '用户账号',
   `ipaddr` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '登录IP地址',
   `status` tinyint(1) NULL DEFAULT 0 COMMENT '登录状态（0成功 1失败）',
@@ -4974,9 +4978,9 @@ CREATE TABLE `sys_login_log`  (
   `access_time` datetime NULL DEFAULT NULL COMMENT '访问时间',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统用户登录记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统用户登录记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_login_log
@@ -4987,18 +4991,18 @@ CREATE TABLE `sys_login_log`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `parent_id` bigint NOT NULL DEFAULT 0 COMMENT '所属上级',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `parent_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '所属上级',
   `title` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '菜单标题',
   `component` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '组件名称',
-  `sort_value` int NOT NULL DEFAULT 1 COMMENT '排序',
-  `status` tinyint NOT NULL DEFAULT 1 COMMENT '状态(0:禁止,1:正常)',
+  `sort_value` int(11) NOT NULL DEFAULT 1 COMMENT '排序',
+  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态(0:禁止,1:正常)',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_parent_id`(`parent_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -5037,7 +5041,7 @@ INSERT INTO `sys_menu` VALUES (30, 1, '1', '1', 1, 1, '2023-07-18 14:37:13', '20
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_oper_log`;
 CREATE TABLE `sys_oper_log`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '日志主键',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志主键',
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '模块标题',
   `method` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '方法名称',
   `request_method` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '请求方式',
@@ -5047,13 +5051,13 @@ CREATE TABLE `sys_oper_log`  (
   `oper_ip` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '主机地址',
   `oper_param` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '请求参数',
   `json_result` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '返回参数',
-  `status` int NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
+  `status` int(11) NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
   `error_msg` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '错误消息',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 95 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -5077,21 +5081,33 @@ INSERT INTO `sys_oper_log` VALUES (79, '角色', 'com.atguigu.spzx.controller.Sy
 INSERT INTO `sys_oper_log` VALUES (80, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 17:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 17:31:19\"},{\"createTime\":\"2023-05-06 17:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 17:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2023-11-11 08:07:14', NULL, 0);
 INSERT INTO `sys_oper_log` VALUES (81, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 17:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 17:31:19\"},{\"createTime\":\"2023-05-06 17:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 17:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2023-11-11 08:07:17', NULL, 0);
 INSERT INTO `sys_oper_log` VALUES (82, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 17:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 17:31:19\"},{\"createTime\":\"2023-05-06 17:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 17:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2023-11-13 03:13:49', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (83, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:02:27', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (84, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:02:29', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (85, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:03:15', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (86, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:03:17', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (87, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:04:53', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (88, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:04:55', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (89, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:04:56', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (90, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:04:59', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (91, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:05:15', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (92, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:11:06', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (93, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:18:41', NULL, 0);
+INSERT INTO `sys_oper_log` VALUES (94, '品牌列表', 'com.atguigu.spzx.manager.controller.BrandController', 'GET', 'MANAGE', 'admin', '/admin/product/brand/1/10', '0:0:0:0:0:0:0:1', NULL, '{\"code\":200,\"data\":{\"endRow\":2,\"hasNextPage\":false,\"hasPreviousPage\":false,\"isFirstPage\":true,\"isLastPage\":true,\"list\":[{\"createTime\":\"2023-05-06 09:31:19\",\"id\":2,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/华为.png\",\"name\":\"华为\",\"updateTime\":\"2023-05-06 09:31:19\"},{\"createTime\":\"2023-05-06 09:30:27\",\"id\":1,\"isDeleted\":0,\"logo\":\"http://139.198.127.41:9000/sph/20230506/小米.png\",\"name\":\"小米\",\"updateTime\":\"2023-06-02 09:40:24\"}],\"navigateFirstPage\":1,\"navigateLastPage\":1,\"navigatePages\":8,\"navigatepageNums\":[1],\"nextPage\":0,\"pageNum\":1,\"pageSize\":10,\"pages\":1,\"prePage\":0,\"size\":2,\"startRow\":1,\"total\":2},\"message\":\"操作成功\"}', 0, NULL, '2024-04-08 23:31:11', NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '角色id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色id',
   `role_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '角色名称',
   `role_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色编码',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role
@@ -5109,35 +5125,21 @@ INSERT INTO `sys_role` VALUES (39, '运维人员', 'yw', NULL, '2023-09-04 10:04
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `role_id` bigint NOT NULL DEFAULT 0,
-  `menu_id` bigint NOT NULL DEFAULT 0,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_id` bigint(20) NOT NULL DEFAULT 0,
+  `menu_id` bigint(20) NOT NULL DEFAULT 0,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
-  `is_half` tinyint NULL DEFAULT NULL,
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_half` tinyint(4) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_role_id`(`role_id` ASC) USING BTREE,
   INDEX `idx_menu_id`(`menu_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 112 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 131 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
-INSERT INTO `sys_role_menu` VALUES (38, 9, 1, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (39, 9, 2, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (40, 9, 3, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (41, 9, 4, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (42, 9, 21, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (43, 9, 5, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (44, 9, 7, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (45, 9, 6, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (46, 9, 8, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (47, 9, 9, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (48, 9, 10, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (49, 9, 11, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (50, 9, 12, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
-INSERT INTO `sys_role_menu` VALUES (51, 9, 13, '2023-06-29 11:52:31', '2023-06-29 11:52:31', 0, 0);
 INSERT INTO `sys_role_menu` VALUES (69, 32, 2, '2023-07-18 14:32:43', '2023-07-18 14:32:43', 0, 0);
 INSERT INTO `sys_role_menu` VALUES (70, 32, 3, '2023-07-18 14:32:43', '2023-07-18 14:32:43', 0, 0);
 INSERT INTO `sys_role_menu` VALUES (71, 32, 1, '2023-07-18 14:32:43', '2023-07-18 14:32:43', 0, 1);
@@ -5167,30 +5169,49 @@ INSERT INTO `sys_role_menu` VALUES (106, 10, 17, '2023-07-18 14:43:53', '2023-07
 INSERT INTO `sys_role_menu` VALUES (107, 10, 18, '2023-07-18 14:43:53', '2023-07-18 14:43:53', 0, 0);
 INSERT INTO `sys_role_menu` VALUES (110, 35, 2, '2023-07-19 14:36:38', '2023-07-19 14:36:38', 0, 0);
 INSERT INTO `sys_role_menu` VALUES (111, 35, 1, '2023-07-19 14:36:38', '2023-07-19 14:36:38', 0, 1);
+INSERT INTO `sys_role_menu` VALUES (112, 9, 1, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (113, 9, 2, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (114, 9, 3, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (115, 9, 4, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (116, 9, 21, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (117, 9, 5, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (118, 9, 7, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (119, 9, 6, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (120, 9, 8, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (121, 9, 9, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (122, 9, 10, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (123, 9, 11, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (124, 9, 12, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (125, 9, 13, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (126, 9, 14, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (127, 9, 15, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (128, 9, 16, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (129, 9, 17, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
+INSERT INTO `sys_role_menu` VALUES (130, 9, 18, '2024-04-08 23:19:50', '2024-04-08 23:19:50', 0, 0);
 
 -- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '会员id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '会员id',
   `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '用户名',
   `password` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '密码',
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '姓名',
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '手机',
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '头像',
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '描述',
-  `status` tinyint NOT NULL DEFAULT 1 COMMENT '状态（1：正常 0：停用）',
+  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态（1：正常 0：停用）',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'admin', '96e79218965eb72c92a549dd5a330112', 'admin', '15011113652', 'https://oss.aliyuncs.com/aliyun_id_photo_bucket/default_handsome.jpg', NULL, 1, '2023-05-04 10:17:18', '2023-05-04 10:37:42', 0);
+INSERT INTO `sys_user` VALUES (1, 'admin', '96e79218965eb72c92a549dd5a330112', 'admin', '15011113652', 'http://123.207.56.238:9090/spzx-bucket/20240408/168a2748fd4f431baf42af877f32d57fmmexport1600396285898.jpg', NULL, 1, '2023-05-04 10:17:18', '2024-04-08 23:22:01', 0);
 INSERT INTO `sys_user` VALUES (5, 'zhangsan', '96e79218965eb72c92a549dd5a330112', '张三', '13589658968', 'https://oss.aliyuncs.com/aliyun_id_photo_bucket/default_handsome.jpg', '', 1, '2023-05-04 10:38:30', '2023-05-04 10:38:56', 0);
 INSERT INTO `sys_user` VALUES (6, 'test1212', '96e79218965eb72c92a549dd5a330112', 'test12', '15011245632', 'http://139.198.127.41:9000/sph/20230505/default_handsome.jpg', 'test12', 1, '2023-05-05 11:03:48', '2023-07-18 10:28:24', 0);
 INSERT INTO `sys_user` VALUES (12, 'lucy', '96e79218965eb72c92a549dd5a330112', '1', '1', NULL, '1', 1, '2023-07-18 14:36:03', '2023-07-18 14:38:23', 0);
@@ -5200,16 +5221,16 @@ INSERT INTO `sys_user` VALUES (12, 'lucy', '96e79218965eb72c92a549dd5a330112', '
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `role_id` bigint NOT NULL DEFAULT 0 COMMENT '角色id',
-  `user_id` bigint NOT NULL DEFAULT 0 COMMENT '用户id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `role_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '角色id',
+  `user_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '用户id',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_role_id`(`role_id` ASC) USING BTREE,
   INDEX `idx_admin_id`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user_role
@@ -5225,8 +5246,8 @@ INSERT INTO `sys_user_role` VALUES (13, 33, 12, '2023-07-18 14:39:07', '2023-07-
 -- ----------------------------
 DROP TABLE IF EXISTS `user_address`;
 CREATE TABLE `user_address`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL DEFAULT 0 COMMENT '用户ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户ID',
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '电话',
   `tag_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '标签名称',
@@ -5235,12 +5256,12 @@ CREATE TABLE `user_address`  (
   `district_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '详细地址',
   `full_address` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '完整地址',
-  `is_default` tinyint NOT NULL DEFAULT 1 COMMENT '是否默认地址（0：否 1：是）',
+  `is_default` tinyint(4) NOT NULL DEFAULT 1 COMMENT '是否默认地址（0：否 1：是）',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标识（0：否 1：是）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标识（0：否 1：是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户地址表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户地址表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_address
@@ -5256,36 +5277,37 @@ INSERT INTO `user_address` VALUES (5, 34, 'nnn', '18074642650', '家', '110000',
 -- ----------------------------
 DROP TABLE IF EXISTS `user_browse_history`;
 CREATE TABLE `user_browse_history`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `user_id` bigint NOT NULL COMMENT '用户ID',
-  `sku_id` bigint NOT NULL DEFAULT 0 COMMENT '商品skuID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `sku_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '商品skuID',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `is_deleted` tinyint NOT NULL DEFAULT 0,
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_user_id`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户浏览记录表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户浏览记录表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_browse_history
 -- ----------------------------
 INSERT INTO `user_browse_history` VALUES (1, 33, 3, '2023-11-12 12:53:51', '2023-11-12 12:53:51', 0);
 INSERT INTO `user_browse_history` VALUES (2, 33, 6, '2023-11-12 12:55:45', '2023-11-12 12:56:02', 0);
+INSERT INTO `user_browse_history` VALUES (3, 33, 2, '2024-04-08 23:41:58', '2024-04-08 23:41:58', 0);
 
 -- ----------------------------
 -- Table structure for user_collect
 -- ----------------------------
 DROP TABLE IF EXISTS `user_collect`;
 CREATE TABLE `user_collect`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `user_id` bigint NOT NULL COMMENT '用户ID',
-  `sku_id` bigint NOT NULL DEFAULT 0 COMMENT '商品skuID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `sku_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '商品skuID',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `is_deleted` tinyint NOT NULL DEFAULT 0,
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_user_id`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户收藏表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户收藏表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_collect
@@ -5296,13 +5318,16 @@ INSERT INTO `user_collect` VALUES (3, 33, 3, '2023-11-12 12:54:58', '2023-11-12 
 INSERT INTO `user_collect` VALUES (4, 33, 6, '2023-11-12 12:55:00', '2023-11-12 12:55:00', 0);
 INSERT INTO `user_collect` VALUES (5, 33, 6, '2023-11-12 12:55:01', '2023-11-12 12:55:01', 0);
 INSERT INTO `user_collect` VALUES (6, 33, 6, '2023-11-12 12:55:02', '2023-11-12 12:55:02', 0);
+INSERT INTO `user_collect` VALUES (7, 33, 2, '2024-04-08 23:41:56', '2024-04-08 23:41:56', 0);
+INSERT INTO `user_collect` VALUES (8, 33, 1, '2024-04-08 23:42:03', '2024-04-08 23:42:03', 0);
+INSERT INTO `user_collect` VALUES (9, 33, 2, '2024-04-08 23:42:11', '2024-04-08 23:42:11', 0);
 
 -- ----------------------------
 -- Table structure for user_info
 -- ----------------------------
 DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户名',
   `password` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '密码',
   `nick_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '昵称',
@@ -5314,12 +5339,12 @@ CREATE TABLE `user_info`  (
   `union_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '微信开放平台unionID',
   `last_login_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '最后一次登录ip',
   `last_login_time` datetime NULL DEFAULT NULL COMMENT '最后一次登录时间',
-  `status` tinyint NULL DEFAULT NULL COMMENT '状态：1为正常，0为禁止',
+  `status` tinyint(4) NULL DEFAULT NULL COMMENT '状态：1为正常，0为禁止',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '会员表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '会员表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_info
