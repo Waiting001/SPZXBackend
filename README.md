@@ -4,17 +4,9 @@
 
 🔥如果需要快速运行项目，请直接到最下面有快速上手篇，根据快速上手指南，可以让你轻松运行项目🔥。
 
-如需项目运行搭建指导，可以添加微信远程协助
-
-![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/9.png)
-
-如果觉得项目完善的还不错的话，请作者喝杯奶茶吧😚
-
-![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/8.png)
-
 如需项目运行搭建指导，可以添加微信远程协助，如果觉得项目完善的还不错的话，也可以请作者喝杯奶茶😚
 
-![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/10.png)
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/8.png)
 
 ## 一、项目功能
 
