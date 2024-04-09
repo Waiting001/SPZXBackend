@@ -91,7 +91,14 @@ https://yarnpkg.com/downloads/1.22.15/yarn-1.22.15.msi（yarn下载）
 
 ## 四、快速上手
 
-❗️❗️**运行本项目首先需要启动 Mysql，redis，nacos，以及Minio** ，之后需要根据你的情况去我的yml配置文件中修改，所有修改的地方我都在IDEA上打了 TODO 注释，如下图，可以快速定位修改，
+❗️❗️**运行本项目首先需要启动 Mysql，redis，nacos，以及Minio** 
+
+我已经把这四个文件上传至百度网盘中，有需要的可以自行下载🌹🌹🌹
+
+链接：https://pan.baidu.com/s/1EZEFFRNqCdZBOkK-hs6wAA?pwd=b37v 
+提取码：b37v
+
+之后需要根据你的情况去我的yml配置文件中修改，所有修改的地方我都在IDEA上打了 TODO 注释，如下图，可以快速定位修改，
 
 ![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/9.png)
 
