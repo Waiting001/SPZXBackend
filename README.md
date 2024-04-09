@@ -2,7 +2,7 @@
 
 ###### 项目运行图片
 
-![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/演示副本.png)
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/演示.png)
 
 # 必看❗️❗️
 
