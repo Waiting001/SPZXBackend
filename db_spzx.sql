@@ -5211,7 +5211,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'admin', '96e79218965eb72c92a549dd5a330112', 'admin', '15011113652', 'http://123.207.56.238:9090/spzx-bucket/20240408/168a2748fd4f431baf42af877f32d57fmmexport1600396285898.jpg', NULL, 1, '2023-05-04 10:17:18', '2024-04-08 23:22:01', 0);
+INSERT INTO `sys_user` VALUES (1, 'admin', '96e79218965eb72c92a549dd5a330112', 'admin', '15011113652', 'http://139.198.127.41:9000/sph/20230505/default_handsome.jpg', NULL, 1, '2023-05-04 10:17:18', '2024-04-08 23:22:01', 0);
 INSERT INTO `sys_user` VALUES (5, 'zhangsan', '96e79218965eb72c92a549dd5a330112', '张三', '13589658968', 'https://oss.aliyuncs.com/aliyun_id_photo_bucket/default_handsome.jpg', '', 1, '2023-05-04 10:38:30', '2023-05-04 10:38:56', 0);
 INSERT INTO `sys_user` VALUES (6, 'test1212', '96e79218965eb72c92a549dd5a330112', 'test12', '15011245632', 'http://139.198.127.41:9000/sph/20230505/default_handsome.jpg', 'test12', 1, '2023-05-05 11:03:48', '2023-07-18 10:28:24', 0);
 INSERT INTO `sys_user` VALUES (12, 'lucy', '96e79218965eb72c92a549dd5a330112', '1', '1', NULL, '1', 1, '2023-07-18 14:36:03', '2023-07-18 14:38:23', 0);
