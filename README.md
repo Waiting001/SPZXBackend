@@ -1,5 +1,9 @@
 # SpringCloud 项目-尚品甄选
 
+###### 项目运行图片
+
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/10.png)
+
 # 必看❗️❗️
 
 🔥如果需要快速运行项目，请直接到最下面有快速上手篇，根据快速上手指南，可以让你轻松运行项目🔥。
