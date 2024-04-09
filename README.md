@@ -58,8 +58,11 @@
 
 ![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/5.png)
 
-
 ## 三、快速上手
+
+❗️❗️**运行本项目首先需要启动 Mysql，redis，nacos，以及Minio** ，之后需要根据你的情况去我的yml配置文件中修改，所有修改的地方我都在IDEA上打了 TODO 注释，如下图，可以快速定位修改，
+
+![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/9.png)
 
 ### Minio图片存储
 
@@ -73,9 +76,11 @@ minio:
   bucketName: spzx-bucket
 ```
 
-2）cmd进入到Monio所在目录
+#### Minio本地启动方式
 
-3）启动Minio，输入minio.exe server D:\minio\data，账号密码都是minioadmin
+我的Monio放在D盘根目录下，需要D:\minio下输入cmd进入命令提示符系统
+
+在命令符提示系统中输入minio.exe server D:\minio\data即可启动成功，账号密码都是minioadmin
 
 ![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/6.png)
 
@@ -128,9 +133,9 @@ cloud:
         server-addr: localhost:8848
 ```
 
-2）启动
+#### Nacos本地启动
 
-进入nacos目录下的bin目录cmd窗口输入**startup.cmd -m standalone**即可
+进入nacos目录下的bin目录cmd窗口输入**startup.cmd -m standalone**即可	
 
 ### 注意：
 
@@ -155,7 +160,7 @@ cloud:
       port: 6379
 ```
 
-如上配置修改完成之后，分别启动如下模块，后端即可正确运行，如果有报错的话，需要针对报错检查排查原因
+如上配置修改完成之后，分别启动如下模块，后端即可正确运行，如果有报错的话，需要针对报错检查排查原因，最后祝大家可以顺利启动，谢谢啦🌹🌹🌹
 
 ![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/7.png)
 
