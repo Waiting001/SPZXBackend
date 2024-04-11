@@ -4,6 +4,8 @@
 
 ![](https://gitee.com/galie/SPZX-Backend/raw/master/IMG/演示.png)
 
+前端演示GIF
+
 ![](https://gitee.com/galie/shiping/raw/master/tinywow_Video_1712590709390_52878502.gif)
 
 # 必看❗️❗️
