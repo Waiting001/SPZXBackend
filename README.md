@@ -104,6 +104,8 @@ https://yarnpkg.com/downloads/1.22.15/yarn-1.22.15.msi（yarn下载）
 
 ❗️❗️**运行本项目首先需要启动 Mysql，redis，nacos，以及Minio** 
 
+❗️❗️**注意：请使用我的前端代码，后端代码以及数据库文件，不然可能会有一些问题，比如登录不跳转，访问无数据**
+
 我已经把这四个文件上传至百度网盘中，有需要的可以自行下载🌹🌹🌹
 
 链接：https://pan.baidu.com/s/1EZEFFRNqCdZBOkK-hs6wAA?pwd=b37v 
