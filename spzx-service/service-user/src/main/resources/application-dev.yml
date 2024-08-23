@@ -13,14 +13,14 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     #TODO 将192.168.10.100修改成自己的ip
-    url: jdbc:mysql://192.168.10.100:3306/db_spzx?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.106.131:3306/db_spzx?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
     password: root
   # Redis的相关配置
   data:
     redis:
       #TODO 将192.168.10.100修改成自己的ip
-      host: 192.168.10.100
+      host: 192.168.106.131
       port: 6379
 
 mybatis:

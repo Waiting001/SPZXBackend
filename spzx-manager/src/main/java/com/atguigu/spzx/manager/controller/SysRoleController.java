@@ -38,6 +38,7 @@ public class SysRoleController {
     // pageSize：每一页显示的条数
     @Operation(summary = "获取角色列表接口")
     @PostMapping("/findByPage/{current}/{limit}")
+
     public Result<PageInfo<SysRole>> findByPage(@RequestBody SysRoleDto sysRoleDto ,
                                                 @PathVariable(value = "current") Integer current ,
                                                 @PathVariable(value = "limit") Integer limit) {
